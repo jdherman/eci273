@@ -1,0 +1,4 @@
+platypus/
+old/
+*.pyc
+.DS_Store
