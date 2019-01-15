@@ -6,12 +6,14 @@ import matplotlib.pyplot as plt
 Q = np.tile([1, 3, 3, 5, 8, 6, 7, 2, 1], 2)
 R = 3.5*np.ones(18)
 T = len(Q)
-K = np.zeros(T)
+K = np.zeros(T+1)
 
 for t in range(T):
-  K[t] = max(R[t] - Q[t] + K[t-1], 0)
+  K[t+1] = max(R[t] - Q[t] + K[t], 0)
 
-print('Reservoir size needed: %f' % np.max(K))
+print(K)
+
+# print('Reservoir size needed: %f' % np.max(K))
 
 
 # Or...let's do this as a function instead!
@@ -22,10 +24,10 @@ print('Reservoir size needed: %f' % np.max(K))
 #   assert len(R) == len(Q), 'R and Q must be the same length'
   
 #   T = len(Q)
-#   K = np.zeros(T)
+#   K = np.zeros(T+1)
 
 #   for t in range(T):
-#     K[t] = max(R[t] - Q[t] + K[t-1], 0)
+#     K[t+1] = max(R[t] - Q[t] + K[t], 0)
 
 #   return np.max(K)
 

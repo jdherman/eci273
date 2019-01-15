@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # really simple reservoir simulation
-cfs_to_taf = 2.29568411*10**-5 * 86400 / 1000
+cfs_to_tafd = 2.29568411*10**-5 * 86400 / 1000
 
 # Set some parameters
 K = 975 # capacity, TAF
@@ -11,7 +11,7 @@ D = 5 # target demand, TAF/day
 # data setup
 Q = np.loadtxt('data/FOL.csv', delimiter=',', 
                 skiprows=1, usecols=[4])
-Q *= cfs_to_taf
+Q *= cfs_to_tafd
 T = len(Q)
 
 S = np.zeros(T)

@@ -1,10 +1,8 @@
 # Basics: variables, if statements, for loops, lists, dictionaries
 # indentation matters!
 
-number = 5
-name = 'somestring'
-
-# print(number)
+# number = 5
+# name = 'somestring'
 
 # if number < 5:
 #   print('less')
@@ -15,7 +13,7 @@ name = 'somestring'
 # python has two main data types: lists and dictionaries
 
 # list: things in order
-# fruits = ['apple', [3.0, 10.0], 'banana', 'coconut', 'date', 'eucalyptus']
+# fruits = ['apple', 'banana', 'coconut', 'date', 'eucalyptus']
 
 # loop over items in a list
 # for fruit in fruits:
@@ -41,7 +39,9 @@ name = 'somestring'
 # def square(x):
 #   return x**2
 
-# print(square(4))
+# x = 10
+# y = square(x)
+# print(y)
 
 # What about arrays and matrices?
 # creating a numpy array (1D,2D)
@@ -81,7 +81,7 @@ name = 'somestring'
 # print(A*3)
 
 # a 2d array (matrix)
-# A2 = np.array([[6,3,7,4,5], [2,6,3,4,1]])
+# A2 = np.array([[6,3,7,4,5], [2,6,3,40,1]])
 
 # indexing [i,j]
 # print(A2[0,3])
@@ -111,7 +111,7 @@ name = 'somestring'
 
 # instead do this...
 # print(M.sum())
-# print(np.sum(M, axis=0)) # either syntax is fine
+# print(np.sum(M)) # either syntax is fine
 
 
 # Matplotlib: how to make plots
@@ -124,7 +124,7 @@ name = 'somestring'
 # plt.xlabel('x value')
 # plt.ylabel('Random number')
 # plt.title('my title')
-# plt.show()
+# # plt.show()
 
 # plt.savefig('something.pdf')
 
