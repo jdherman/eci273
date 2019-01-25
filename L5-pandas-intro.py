@@ -4,7 +4,9 @@ import pandas as pd
 
 # read CSV data into a dataframe - pandas can parse dates
 # this will be familiar to R users (not so much matlab users)
-df = pd.read_csv('data/SHA.csv', index_col=0, parse_dates=True)
+df = pd.read_csv('data/SHA.csv', 
+                 index_col=0, 
+                 parse_dates=True)
 
 # dataframes have column names and an index
 # print(df.index)
@@ -16,10 +18,10 @@ df = pd.read_csv('data/SHA.csv', index_col=0, parse_dates=True)
 # print(df.ix['2006-02-01'].inflow)
 
 # let's only use the inflow and outflow columns
-# df = df[['inflow', 'outflow']]
+df = df[['inflow', 'outflow']]
 
 # because the dataframe is indexed by date, we can slice with dates!
-# df = df['2005-10-01':'2008-09-30']
+df = df['2005-10-01':'2008-09-30']
 
 # it knows the column names from the file
 # also notice the plot x-axis keeps the dates, even if you zoom in
@@ -33,6 +35,7 @@ df = pd.read_csv('data/SHA.csv', index_col=0, parse_dates=True)
 
 # # to create a dataframe from a matrix, need to provide index and col names
 # index = pd.date_range('2005-10-01', '2008-09-30', freq='D')
+# index = pd.date_range('2005-10-01', '2005-10-02', freq='ms')
 # df = pd.DataFrame(matrix, index=index, columns=['inflow','outflow'])
 # print(df) # this should match the original that we took "matrix" from
 

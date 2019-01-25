@@ -11,7 +11,9 @@ def storage_to_elevation(S): # from regression
 def simulate_folsom(Q):
   K = 975 # TAF capacity
   D = 3.5 # TAF/day demand
-  turbine_elevation = 134 # feet
+  # assume a constant downstream water elevation
+  # (neglects the hydraulic effects of changing flowrate)
+  downstream_wse = 134 # feet
   turbine_max_outflow = 8600 # cfs
   efficiency = 0.82
 
@@ -23,7 +25,7 @@ def simulate_folsom(Q):
 
   S[0] = K # start simulation full
   WSE[0] = storage_to_elevation(S[0])
-  R[0] = min(D, Q[0]) # fix
+  R[0] = D
 
   for t in range(1,T):
     spill[t-1] = max(S[t-1] + Q[t-1] - R[t-1] - K, 0)
@@ -40,7 +42,7 @@ def simulate_folsom(Q):
   reliability = R[R==D].size / float(T)
 
   # hydropower calculations
-  h = WSE - turbine_elevation # hydraulic head, feet
+  h = WSE - downstream_wse # hydraulic head, feet
   turbine_outflow = np.clip((R+spill)/cfs_to_taf, 0, turbine_max_outflow) # this is a useful function
   power = efficiency * h * turbine_outflow / (1.181*10**4) # MW
 

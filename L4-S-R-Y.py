@@ -5,9 +5,9 @@ import pandas as pd
 # function from last class
 def sequent_peak(R, Q):
   T = len(Q)
-  K = np.zeros(T)
+  K = np.zeros(T+1)
   for t in range(T):
-    K[t] = max(R[t] - Q[t] + K[t-1], 0)
+    K[t+1] = max(R[t] - Q[t] + K[t], 0)
   return np.max(K)
 
 mu = 100 # average annual flow
@@ -16,9 +16,10 @@ N = 100000
 Ks = np.zeros(len(alphas))
 
 for sigma in [20,40,60]:
+  inflows = np.random.normal(mu, sigma, size=(N))
+
   for i,alpha in enumerate(alphas):
-    demand = alpha*mu*np.ones(N,)
-    inflows = np.random.normal(mu, sigma, size=(N))
+    demand = alpha * mu * np.ones(N,)
     Ks[i] = sequent_peak(demand, inflows) / mu
 
   plt.plot(alphas, Ks)
