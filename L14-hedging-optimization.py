@@ -10,7 +10,7 @@ b = 2 # cost function parameters
 
 # data setup
 Q = np.loadtxt('data/FOL-monthly-inflow-TAF.csv', delimiter=',', 
-               skiprows=0, usecols=[1])
+               skiprows=1, usecols=[1])
 T = len(Q)
 
 def simulate(x):
@@ -40,11 +40,11 @@ def simulate(x):
     cost[t] = a*shortage**b
 
   # print('h0 = %f, hf = %f, cost = %f' % (h0,hf,cost.mean()))
-  return cost.mean() # minimize average annual cost
+  return cost.mean()  
 
 # to use gradient-based optimization...
 res = minimize(simulate, 
-               x0=[0, 1000], 
+               x0=[0,D], 
                bounds = [(0,D), (D,K+D)])
 
 # to use EA...

@@ -24,6 +24,7 @@ def thomasfiering_daily(mu, sigma, rho, N_years):
 
 # load data and add column for "day of water year" (dowy)
 df = pd.read_csv('data/FOL.csv', index_col=0, parse_dates=True)
+df.rename(columns={'FOL_INFLOW_CFS': 'inflow'}, inplace=True)
 Q = np.log(cfs_to_taf * df.inflow).to_frame()
 Q['dowy'] = pd.Series([water_day(d) for d in Q.index.dayofyear], index=Q.index)
 
@@ -39,44 +40,47 @@ sigma = sigma.values # numpy
 
 # plot these daily values
 
-# plt.subplot(1,2,1)
-# plt.plot(mean_daily_flow, color='0.5')
-# plt.plot(mu, color='k', linewidth=2)
-# plt.xlabel('Day of water year')
-# plt.xlim([0,365])
-# plt.ylabel('Log Mean streamflow')
+plt.subplot(1,2,1)
+plt.plot(mean_daily_flow, color='0.5')
+plt.plot(mu, color='k', linewidth=2)
+plt.xlabel('Day of water year')
+plt.xlim([0,365])
+plt.ylabel('Log Mean streamflow')
 
-# plt.subplot(1,2,2)
-# plt.plot(std_daily_flow, color='0.5')
-# plt.plot(sigma, color='k', linewidth=2)
-# plt.xlabel('Day of water year')
-# plt.xlim([0,365])
-# plt.ylabel('Stdev log streamflow')
-# plt.tight_layout()
-# plt.show()
+plt.subplot(1,2,2)
+plt.plot(std_daily_flow, color='0.5')
+plt.plot(sigma, color='k', linewidth=2)
+plt.xlabel('Day of water year')
+plt.xlim([0,365])
+plt.ylabel('Stdev log streamflow')
+plt.tight_layout()
+plt.show()
 
 # generate synthetic values and compare plots
 # assume a constant lag-1 autocorrelation
-Q_synthetic = thomasfiering_daily(mu, sigma, rho=0.95, N_years=15)
+# Q_synthetic = thomasfiering_daily(mu, sigma, rho=0.95, N_years=15)
 
 # get the historical values back in real space
-Q.inflow = np.exp(Q.inflow)
+# Q.inflow = np.exp(Q.inflow)
 
-plt.subplot(2,1,1)
-plt.plot(Q.inflow.values)
-plt.ylim([0,300])
+# plt.subplot(2,1,1)
+# plt.plot(Q.inflow.values)
+# plt.ylim([0,300])
 
-plt.subplot(2,1,2)
-plt.plot(Q_synthetic)
-plt.ylim([0,300])
-plt.show()
+# plt.subplot(2,1,2)
+# plt.plot(Q_synthetic)
+# plt.ylim([0,300])
+# plt.show()
 
 # compare ACF/PACF in historical and synthetic
 # from statsmodels.tsa import stattools
 # Q = Q.inflow.values
 
 # plt.subplot(2,2,1)
-# acf,ci = stattools.acf(Q, nlags = 40, alpha=0.05)
+# acf,ci = stattools.acf(Q, nlags = 12, alpha=0.05)
+# print(acf)
+# print(ci)
+
 # plt.plot(acf, linewidth=2)
 # plt.plot(ci, linestyle='dashed', color='0.5')
 # plt.title('ACF, Historical')

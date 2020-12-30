@@ -4,7 +4,7 @@ from cvxpy import *
 import seaborn as sns
 sns.set_style('whitegrid')
 
-Q = np.loadtxt('data/FOL-monthly-inflow-TAF.csv', delimiter=',', skiprows=0, usecols=[1])
+Q = np.loadtxt('data/FOL-monthly-inflow-TAF.csv', delimiter=',', skiprows=1, usecols=[1])
 T = len(Q)
 K = 975 # reservoir capacity
 d = 150*np.ones(T) # target demand (TAF/day)
@@ -27,7 +27,7 @@ for w in np.arange(0,1+dw,dw):
   c_mass_balance = [x[1:] == x[:-1] - u + Q] # state transition
   c_release = [u >= 0] # release lower/upper bounds
   c_storage = [x >= 0, x <= K] # storage lower/upper bounds
-  c_init_final = [x[0] == K/2, x[T] >= 200]
+  c_init_final = [x[0] == 500, x[T] >= 200]
   constraints = c_mass_balance + c_release + c_storage + c_init_final
 
   prob = Problem(obj, constraints)
@@ -42,7 +42,7 @@ for w in np.arange(0,1+dw,dw):
   print(i)
   i += 1
 
-# plt.show()
+plt.show()
 
 results = np.array(results)
 plt.scatter(results[:,0],results[:,1], s=30, c='k')

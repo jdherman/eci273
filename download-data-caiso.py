@@ -3,10 +3,10 @@ import urllib
 import numpy as np
 from io import StringIO
 
-dates = pd.date_range(start='4/20/2010', end='1/20/2018')
+dates = pd.date_range(start='4/20/2010', end='12/29/2020')
 dates = dates.strftime('%Y%m%d')
 
-hours = pd.date_range(start='4/20/2010', end='1/21/2018', freq='H')
+hours = pd.date_range(start='4/20/2010', end='12/29/2020', freq='H')
 cols = ['geothermal', 'biomass', 'biogas', 'small hydro', 'wind total', 'solar',
         'renewables', 'nuclear', 'thermal', 'imports', 'hydro']
 

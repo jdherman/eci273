@@ -10,7 +10,7 @@ D = 5 # target demand, TAF/day
 
 # data setup
 Q = np.loadtxt('data/FOL.csv', delimiter=',', 
-                skiprows=1, usecols=[4])
+                skiprows=1, usecols=[1])
 Q *= cfs_to_tafd
 T = len(Q)
 
@@ -30,7 +30,7 @@ for t in range(1,T):
   # release is based on demand
   if S[t] + Q[t] > D:
     R[t] = D
-    met_demand += 1
+    met_demand = met_demand + 1
   else:
     R[t] = S[t] + Q[t]
 
@@ -42,6 +42,7 @@ print('The reliability is', reliability)
 # just plotting below here
 plt.subplot(3,1,1)
 plt.plot(S)
+plt.legend(['Simulated', 'Observed'])
 plt.ylabel('Storage (TAF)')
 
 plt.subplot(3,1,2)

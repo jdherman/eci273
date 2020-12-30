@@ -6,12 +6,12 @@ import pandas as pd
 
 df = pd.read_csv('data/putah-winters.csv', 
   index_col=0, parse_dates=True)
-# df.plot()
-# plt.show()
+df.plot()
+plt.show()
 
 ###########
 # first: how much does the reservoir alter the 3-day peak flow?
-max3day = df.rolling(3).mean().resample('AS-OCT').max()
+# max3day = df.rolling(3).mean().resample('AS-OCT').max()
 # max3day.plot()
 # plt.title('Annual maximum 3-day flow average (cfs)')
 # plt.show()
@@ -24,6 +24,7 @@ max3day = df.rolling(3).mean().resample('AS-OCT').max()
 # # next: how much does the reservoir alter the 30-day minimum flow?
 # min30day = (df.rolling(30).mean()
 #               .resample('AS-OCT').min())
+# min30day['something_else'] = min30day*4
 # min30day.plot()
 # plt.title('Annual minimum 30-day flow average (cfs)')
 # plt.show()
@@ -43,7 +44,7 @@ max3day = df.rolling(3).mean().resample('AS-OCT').max()
 #           .flow_cfs.dt.dayofyear # convert that date to day of year
 #           .apply(water_day)) # apply custom function above to get DOWY
 
-# print(dowy)
+# # print(dowy)
 # dowy.plot()
 # plt.ylabel('Day of Water Year (Oct 1 = 0)')
 # plt.show()

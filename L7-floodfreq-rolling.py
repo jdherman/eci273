@@ -15,20 +15,16 @@ def ln2(x,T):
   Qt = np.exp(m + Zp*s)
   return Qt
 
-df = pd.read_csv('data/folsom-annual-maxes.csv', index_col=0, parse_dates=True)
-
-# once for the whole series
-# print(df.apply(ln2, T=100))
-
+df = pd.read_csv('data/folsom-annual-peak-flow.csv', index_col=0, parse_dates=True)
 w = 50
 T = 100
 
-# rolling window
-Q100Rolling = df.rolling(w).apply(ln2, kwargs={'T':T})
+# rolling window (the 'raw=True' option passes the values as numpy arrays)
+Q100Rolling = df.rolling(w).apply(ln2, kwargs={'T':T}, raw=True)
 ax = Q100Rolling.plot()
 
 # expanding window
-Q100Expanding = df.expanding(w).apply(ln2, kwargs={'T':T})
+Q100Expanding = df.expanding(w).apply(ln2, kwargs={'T':T}, raw=True)
 Q100Expanding.plot(ax=ax)
 
 plt.ylabel('Estimate of 100-year flood event (cfs)')

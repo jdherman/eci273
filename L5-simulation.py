@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # added a spill variable since that counts
-# for downstream flows too
+# for downstream environmental flows too
 
 def simulate(K, D, Q):
   T = len(Q)

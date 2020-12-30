@@ -22,13 +22,13 @@ def pareto_sort(P):
 
       elif keep[i] and dominates(P[j,:], P[i,:]):
         keep[i] = False
-
+  
   return P[keep,:]
 
 
 # a matrix of data points for a hypothetical 2-objective problem
 circle_points = np.loadtxt('data/circle-points.csv', delimiter=',')
-pareto = -pareto_sort(circle_points)
+pareto = pareto_sort(circle_points)
 
 plt.scatter(circle_points[:,0],circle_points[:,1], c='0.7')
 plt.scatter(pareto[:,0], pareto[:,1], c='red')

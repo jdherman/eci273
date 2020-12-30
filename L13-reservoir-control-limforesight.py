@@ -4,7 +4,7 @@ from cvxpy import *
 import seaborn as sns
 sns.set_style('whitegrid')
 
-Q = np.loadtxt('data/FOL-monthly-inflow-TAF.csv', delimiter=',', skiprows=0, usecols=[1])
+Q = np.loadtxt('data/FOL-monthly-inflow-TAF.csv', delimiter=',', skiprows=1, usecols=[1])
 T = len(Q)
 
 K = 975 # reservoir capacity
@@ -23,10 +23,10 @@ for i in range(0,T,h): # zero to T in steps of h
 
   # objective function
   # subtract the storage to incentivize saving water
-  # obj = Minimize(sum((pos(d - u))**2) - x[h])
+  obj = Minimize(sum((pos(d - u))**2) - x[h])
 
   # objective function with carryover value target
-  obj = Minimize(sum((pos(d - u))**2) + pos(200-x[h])**2)
+  # obj = Minimize(sum((pos(d - u))**2) + pos(200-x[h])**2)
 
   # initial condition
   if i==0:
@@ -42,18 +42,18 @@ for i in range(0,T,h): # zero to T in steps of h
   constraints = c_mass_balance + c_release + c_storage + c_init_final
 
   prob = Problem(obj, constraints)
-  prob.solve()
+  prob.solve(solver='ECOS')
 
   # now look at the results
   print('Status: %s' % prob.status)
   print('Obj Fun: %f' % obj.value)
 
   # save in big array
-  x_save[i:i+h+1] = x.value.A.flatten()
+  x_save[i:i+h+1] = x.value.flatten()
 
   if h > 1:
-    u_save[i:i+h] = u.value.A.flatten()
-    shortage_save[i:i+h] = (d-u.value.A.flatten()).clip(0,999)
+    u_save[i:i+h] = u.value.flatten()
+    shortage_save[i:i+h] = (d-u.value.flatten()).clip(0,999)
   else:
     u_save[i:i+h] = u.value
     shortage_save[i:i+h] = (d-u.value).clip(0,999)

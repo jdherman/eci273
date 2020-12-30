@@ -1,4 +1,3 @@
-from __future__ import division
 import numpy as np 
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize, differential_evolution
@@ -63,7 +62,7 @@ for h0 in h0s:
   i += 1
 
 X,Y = np.meshgrid(h0s, hfs)
-plt.contour(X,Y,data.T, 100, cmap=plt.cm.cool)
+plt.contour(X,Y,data.T, 50, cmap=plt.cm.cool)
 plt.colorbar()
 plt.title('Average Shortage Cost ("$")')
 plt.xlabel(r'$h_0$')

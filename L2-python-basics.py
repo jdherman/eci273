@@ -1,13 +1,13 @@
 # Basics: variables, if statements, for loops, lists, dictionaries
 # indentation matters!
 
-# number = 5
-# name = 'somestring'
+number = 3
+name = 'somestring'
 
-# if number < 5:
-#   print('less')
-# else:
-#   print('more')
+if number < 5:
+  print('less')
+else:
+  print('more')
 
 
 # python has two main data types: lists and dictionaries
@@ -124,7 +124,7 @@
 # plt.xlabel('x value')
 # plt.ylabel('Random number')
 # plt.title('my title')
-# # plt.show()
+# plt.show()
 
-# plt.savefig('something.pdf')
+# plt.savefig('something.png', dpi = 600)
 

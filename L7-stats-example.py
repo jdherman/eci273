@@ -4,7 +4,7 @@ from scipy import stats
 
 # Folsom annual inflow data
 # summary statistics, histogram, QQ plot
-annQ = np.loadtxt('data/folsom-annual.csv', delimiter=',', skiprows=1, usecols=[1])
+annQ = np.loadtxt('data/folsom-annual-flow.csv', delimiter=',', skiprows=1, usecols=[1])
 N = len(annQ)
 
 m = np.mean(annQ)
@@ -16,20 +16,21 @@ print('Std. Dev. = %f' % s)
 print('Skew Coef. = %f' % g) # no skew function in numpy
 
 # other keyword arguments: bins, normed (for PDF instead of count)
-plt.hist(annQ, normed=True, color='gray', edgecolor='none')
+plt.hist(annQ, density=True, color='gray', edgecolor='none')
 
 # plot the fitted pdf on top of the histogram
 x = np.arange(min(annQ),max(annQ), 10) # points to plot at
 pdf = stats.norm.pdf(x, loc=m, scale=s)
 plt.plot(x, pdf, color='k', linewidth=2)
-plt.xlabel('Inflow (TAF/yr)')
-plt.ylabel('PDF')
+plt.xlabel('inflow (taf/yr)')
+plt.ylabel('pdf')
 plt.show()
 
-# next figure - QQ plot and find PPCC
+# next figure - qq plot and find ppcc
 plt.figure()
 quantiles = np.arange(1,N+1)/float(N+1)
 Zp = stats.norm.ppf(quantiles)
+
 Qpred = m + s*Zp
 plt.scatter(Qpred, np.sort(annQ), color='red')
 plt.plot([-1000,7000],[-1000,7000], color='k', linewidth=2)

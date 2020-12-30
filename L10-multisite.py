@@ -33,18 +33,22 @@ def thomasfiering(x1, x2, N):
     Z = np.random.multivariate_normal([0,0], Sigma, 1)
     Q1[i] = m1 + r1*(Q1[i-1] - m1) + Z[0,0]*s1*np.sqrt(1-r1**2)
     Q2[i] = m2 + r2*(Q2[i-1] - m2) + Z[0,1]*s2*np.sqrt(1-r2**2)
-
   return np.exp(Q1), np.exp(Q2)
 
-# read in data and upscale to annual
-dfF = pd.read_csv('data/FOL.csv', index_col=0, parse_dates=True)
-dfS = pd.read_csv('data/SHA.csv', index_col=0, parse_dates=True)
+# read in data and upscale to annual. rename the column we're going to use.
+# this is an example of "method chaining" with pandas dataframes
+# it's not required to use multiple lines, but usually makes it more readable.
+dfF = (pd.read_csv('data/FOL.csv', index_col=0, parse_dates=True)
+         .rename(columns={'FOL_INFLOW_CFS':'inflow'}))
+dfS = (pd.read_csv('data/SHA.csv', index_col=0, parse_dates=True)
+         .rename(columns={'SHA_INFLOW_CFS':'inflow'}))
+
 dfS.inflow *= cfs_to_taf
 dfF.inflow *= cfs_to_taf
 dfS = dfS.resample('AS-OCT').sum()
 dfF = dfF.resample('AS-OCT').sum()
 
-# generate synthetic
+# generate synthetic (input numpy arrays)
 Q1, Q2 = thomasfiering(dfS.inflow.values, dfF.inflow.values, N=200)
 
 # compare spatial correlation

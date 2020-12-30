@@ -6,23 +6,24 @@ import pandas as pd
 # this will be familiar to R users (not so much matlab users)
 df = pd.read_csv('data/SHA.csv', index_col=0, parse_dates=True)
 
-Q = df.inflow # a pandas "Series"
-Q = Q.resample('AS-OCT').sum()
+Q = df.SHA_INFLOW_CFS # a pandas series (daily)
+# Q = Q.resample('AS-OCT').sum() # annual values
 print(Q.autocorr(lag=1))
 
 # plot a correlogram with confidence bounds
-# pd.tools.plotting.autocorrelation_plot(Q)
-# plt.xlim([0,4])
-# plt.show()
+pd.plotting.autocorrelation_plot(Q)
+plt.xlim([0,50])
+plt.show()
 
-# from statsmodels.tsa import stattools
-# pacf = stattools.pacf(Q, nlags=40)
-# plt.plot(pacf)
-# plt.show()
+from statsmodels.tsa import stattools
+pacf = stattools.pacf(Q, nlags=50)
+plt.plot(pacf)
+plt.show()
 
 # we did this with pandas to simplify the resampling operations
 # but we can also do it with numpy
-# Q = df.inflow.values # now a numpy array
+# (using annual flow values)
+# Q = df.SHA_INFLOW_CFS.resample('AS-OCT').sum().values # now a numpy array
 
 # def autocorr(x,k):
 #   return np.corrcoef(x[:len(x)-k], x[k:])[0,1]

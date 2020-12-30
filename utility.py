@@ -21,4 +21,3 @@ def simulate(K, D, Q):
       R[t] = S[t] + Q[t]
 
   return R[R==D].size / float(T)
-

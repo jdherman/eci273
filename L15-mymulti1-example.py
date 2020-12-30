@@ -13,7 +13,7 @@ def f2(x):
 
 x_keep = []
 f_keep = []
-dw = 0.1 # how much to change weights by
+dw = 0.05 # how much to change weights by
 
 for w in np.arange(0,1+dw,dw):
 

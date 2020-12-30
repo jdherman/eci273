@@ -30,8 +30,8 @@ prob.solve()
 print('Status: %s' % prob.status)
 print('Obj Fun: %f' % obj.value)
 
-#######################
-# all plotting below here
+# #######################
+# # all plotting below here
 
 plt.subplot(4,1,1)
 plt.plot(x.value)
@@ -44,7 +44,7 @@ plt.legend(['Inflow', 'Delivery'])
 plt.ylabel('Flow (TAF/month)')
 
 plt.subplot(4,1,3)
-shortage = (d-u.value.A.flatten()).clip(0,999)
+shortage = (d-u.value.flatten()).clip(0,999)
 plt.plot(shortage, color='seagreen')
 plt.ylabel('Shortage (TAF/month)')
 

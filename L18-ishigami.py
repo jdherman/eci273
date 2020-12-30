@@ -6,11 +6,11 @@ import numpy as np
 problem = {
   'num_vars': 3,
   'names': ['x1', 'x2', 'x3'],
-  'bounds': [[-np.pi, np.pi]]*3
+  'bounds': [[-np.pi, np.pi]]*3 
 }
 
 # Generate samples
-param_values = saltelli.sample(problem, 10000)
+param_values = saltelli.sample(problem, 1000)
 
 # Run model (example)
 Y = Ishigami.evaluate(param_values)

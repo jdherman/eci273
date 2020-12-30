@@ -49,12 +49,8 @@ def simulate_folsom(Q):
   return S, R+spill, power
 
 
-df = pd.read_csv('data/L6-FOL-daily.csv', index_col=0, parse_dates=True)
-
-# some missing values to deal with first
-# print(df[df.isnull().any(axis=1)])
-df = df.fillna(method='ffill')
-Q = df.inflow.values
+df = pd.read_csv('data/FOL.csv', index_col=0, parse_dates=True)
+Q = df.FOL_INFLOW_CFS.values * cfs_to_taf # .values gives a numpy array
 
 S, R, power = simulate_folsom(Q)
 

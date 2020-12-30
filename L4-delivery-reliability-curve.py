@@ -14,7 +14,7 @@ for K in [0, 3500, 9500]:
   for i in range(len(D)):
     reliability[i] = simulate(K, D[i], Q)
   
-  plt.plot(reliability, D, '.', linewidth=2)
+  plt.plot(reliability, D, '.-', linewidth=2)
 
 plt.xlabel('Reliability')
 plt.ylabel('Demand (TAF/m)')

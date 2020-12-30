@@ -44,9 +44,9 @@ def thomasfiering_monthly(mu, sigma, rho, N_years):
 
 # read in data and generate synthetic timeseries
 df = pd.read_csv('data/FOL.csv', index_col=0, parse_dates=True)
-Q = (cfs_to_taf * df.inflow).resample('M').sum().values
+Q = (cfs_to_taf * df.FOL_INFLOW_CFS).resample('M').sum().values
 mu,sigma,rho = get_monthly_stats(Q)
-Q_synthetic = thomasfiering_monthly(mu, sigma, rho, N_years=200)
+Q_synthetic = thomasfiering_monthly(mu, sigma, rho, N_years=15)
 
 
 # compare synthetic stats to historical

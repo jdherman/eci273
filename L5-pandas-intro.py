@@ -9,19 +9,22 @@ df = pd.read_csv('data/SHA.csv',
                  parse_dates=True)
 
 # dataframes have column names and an index
-# print(df.index)
-# print(df.columns)
+print(df.index)
+print(df.columns)
+
+# let's only use the inflow and outflow columns, and rename them
+# df = df[['SHA_INFLOW_CFS', 'SHA_OUTFLOW_CFS']]
+# df.rename(columns={'SHA_INFLOW_CFS': 'inflow', 'SHA_OUTFLOW_CFS': 'outflow'}, inplace=True)
+# print(df)
 
 # accessing columns and rows
 # print(df.inflow) # or df['inflow']. One column is called a Series.
-# print(df.ix['2006-02-01']) # or df.loc[date]
-# print(df.ix['2006-02-01'].inflow)
+# print(df.loc['2006-02-01']) 
+# print(df.loc['2006-02-01'].inflow)
 
-# let's only use the inflow and outflow columns
-df = df[['inflow', 'outflow']]
 
 # because the dataframe is indexed by date, we can slice with dates!
-df = df['2005-10-01':'2008-09-30']
+# df = df['2005-10-01':'2008-09-30']
 
 # it knows the column names from the file
 # also notice the plot x-axis keeps the dates, even if you zoom in
@@ -35,7 +38,6 @@ df = df['2005-10-01':'2008-09-30']
 
 # # to create a dataframe from a matrix, need to provide index and col names
 # index = pd.date_range('2005-10-01', '2008-09-30', freq='D')
-# index = pd.date_range('2005-10-01', '2005-10-02', freq='ms')
 # df = pd.DataFrame(matrix, index=index, columns=['inflow','outflow'])
 # print(df) # this should match the original that we took "matrix" from
 
@@ -63,6 +65,7 @@ df = df['2005-10-01':'2008-09-30']
 # example: aggregate daily to monthly
 # watch out for units here
 # df = df.resample('M').sum()
+# print(df)
 # df.plot(linewidth=2)
 # plt.show()
 

@@ -12,14 +12,14 @@ x = np.random.rand(10)
 print(x) # confirm it's the same every time
 
 # generate 1000 values uniformly distributed between 15 and 20
-x = np.random.uniform(10, 20, 10000)
+# x = np.random.uniform(10, 20, 10000)
 
 # generate 1000 values from standard normal
-x = np.random.standard_normal(1000)
+# x = np.random.standard_normal(1000)
 
 # generate 1000 normally distributed values
 # with mean 5 and standard deviation 2
-x = np.random.normal(5, 2, 100000)
+# x = np.random.normal(5, 2, 100000)
 
 # generate 1000 lognormal values
 # careful, mean/std are in real space not log space

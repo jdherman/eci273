@@ -14,7 +14,7 @@ def thomasfiering(x,N):
   x = np.log(x) # log-space avoids negative values
   mu = x.mean()
   sigma = x.std()
-  rho = 0.9 #autocorr(x,1)
+  rho = autocorr(x,1)
   Q = np.zeros(N) # initialize
   Q[0] = np.random.normal(mu,sigma,1) 
 
@@ -26,7 +26,7 @@ def thomasfiering(x,N):
 
 # assume annual flow data is lognormally distributed
 # this will avoid negative flows
-Q = np.loadtxt('data/folsom-annual.csv', delimiter=',', skiprows=1, usecols=[1])
+Q = np.loadtxt('data/folsom-annual-flow.csv', delimiter=',', skiprows=1, usecols=[1])
 Q_synthetic = thomasfiering(Q, N=200)
 
 print('Means: %f, %f' % (Q.mean(),Q_synthetic.mean()))

@@ -7,7 +7,7 @@ from SALib.analyze import sobol
 # hymod as defined by Gharari et al. HESS 2013
 # load daily data for 1 year (P,PET,Q)
 ndays = 365
-data = np.loadtxt('leaf-river-data.txt', skiprows=1)
+data = np.loadtxt('data/leaf-river-data.txt', skiprows=1)
 data_P = data[0:ndays,3]
 data_PET = data[0:ndays,4]
 data_Q = data[0:ndays,5]
