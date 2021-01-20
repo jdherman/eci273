@@ -18,7 +18,7 @@ S = np.zeros(T)
 R = np.zeros(T)
 shortage = np.zeros(T)
 
-S[0] = K # start simulation full
+S[0] = K/2 # start simulation full
 R[0] = D # first day meets demand
 met_demand = 1 # counter
 
@@ -42,7 +42,7 @@ print('The reliability is', reliability)
 # just plotting below here
 plt.subplot(3,1,1)
 plt.plot(S)
-plt.legend(['Simulated', 'Observed'])
+# plt.legend(['Simulated', 'Observed'])
 plt.ylabel('Storage (TAF)')
 
 plt.subplot(3,1,2)

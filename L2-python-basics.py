@@ -4,11 +4,10 @@
 number = 3
 name = 'somestring'
 
-if number < 5:
-  print('less')
-else:
-  print('more')
-
+# if number < 5:
+#   print('less')
+# else:
+#   print('more')
 
 # python has two main data types: lists and dictionaries
 
@@ -66,7 +65,7 @@ else:
 # A = np.array([6, 3, 7, 4, 5])
 
 # indexing [start:stop:step]
-# defaults: start=0, stop=N+1, step=1
+# defaults: start=0, stop=N, step=1 (N is the number of values in the array)
 # print(A[2:]) # from i to end
 # print(A[:2]) # from beginning to i (not inclusive)
 # print(A[-1]) # negative indexing is allowed!
@@ -115,7 +114,6 @@ else:
 
 
 # Matplotlib: how to make plots
-
 # import matplotlib.pyplot as plt
 
 # data = np.random.rand(100)
@@ -126,5 +124,5 @@ else:
 # plt.title('my title')
 # plt.show()
 
-# plt.savefig('something.png', dpi = 600)
+# plt.savefig('something.png', dpi = 300)
 

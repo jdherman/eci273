@@ -15,11 +15,11 @@ outflow = data[:,1] * cfs_to_tafd # TAF/d
 storage = data[:,2] / 1000 # AF to TAF
 
 # first plot: time series of storage
-plt.plot(storage)
-plt.xlabel('Days since Oct 1 2000')
-plt.ylabel('Storage (TAF)')
-plt.ylim([0,4500])
-plt.show()
+# plt.plot(storage)
+# plt.xlabel('Days since Oct 1 2000')
+# plt.ylabel('Storage (TAF)')
+# plt.ylim([0,4500])
+# plt.show()
 
 # # second plot: time series of inflow and outflow
 # plt.plot(inflow)

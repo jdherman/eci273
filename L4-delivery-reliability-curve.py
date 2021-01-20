@@ -6,8 +6,9 @@ from utility import simulate
 Q = np.loadtxt('data/FTO-FNF.csv', delimiter=',', skiprows=1, usecols=[1])
 Q /= 1000 # TAF
 
-D = np.arange(0,1000,50) # make an array of storage values
-reliability = np.zeros(len(D)) # we'll calculate these for each K
+D = np.arange(0,1000,50) # make an array of demand values
+
+reliability = np.zeros(len(D)) # we'll calculate these for each demand
 
 # plot a curve for different fixed storage amounts
 for K in [0, 3500, 9500]:

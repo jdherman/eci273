@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # Oroville
 
 # Set some parameters
-K = 0 # capacity, TAF
+K = 3500 # capacity, TAF
 D = 300 # target demand, TAF/month
 # data setup
 Q = np.loadtxt('data/FTO-FNF.csv', delimiter=',', skiprows=1, usecols=[1])
@@ -29,5 +29,5 @@ for t in range(1,T):
   else:
     R[t] = S[t] + Q[t]
 
-reliability = R[R==D].size / float(T)
+reliability = R[R==D].size / T
 print(reliability)
