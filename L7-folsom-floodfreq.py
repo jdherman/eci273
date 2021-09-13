@@ -1,4 +1,3 @@
-from __future__ import division # for Python 2 people
 import numpy as np 
 import matplotlib.pyplot as plt
 from scipy import stats
@@ -9,8 +8,8 @@ x = np.loadtxt('data/folsom-annual-peak-flow.csv',
 y = np.log(x)
 N = len(y)
 
-plt.hist(x)
-plt.show()
+# plt.hist(y)
+# plt.show()
 
 # what is the estimate of the 100-year flood?
 # assuming 2-parameter lognormal distribution
@@ -29,10 +28,10 @@ print('LP3 %d-year flood: %f' % (T,Qt))
 
 # confidence interval for lognormal
 # comment out LP3 part first
-halfwidth = stats.norm.ppf(0.975)*np.sqrt((s**2/N)*(1 + Zp**2/2))
-lb = np.exp(m + Zp*s - halfwidth)
-ub = np.exp(m + Zp*s + halfwidth)
-print('95%% CI: [%f, %f]' % (lb,ub))
+# halfwidth = stats.norm.ppf(0.975)*np.sqrt((s**2/N)*(1 + Zp**2/2))
+# lb = np.exp(m + Zp*s - halfwidth)
+# ub = np.exp(m + Zp*s + halfwidth)
+# print('95%% CI: [%f, %f]' % (lb,ub))
 
 
 

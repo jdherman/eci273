@@ -2,3 +2,5 @@ platypus/
 old/
 *.pyc
 .DS_Store
+data/cdec-scraper
+data/not-used-F21

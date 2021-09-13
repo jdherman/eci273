@@ -8,8 +8,8 @@ df = pd.read_csv('data/SHA.csv',
                  parse_dates=True)
 
 # dataframes have column names and an index
-# print(df.index)
-# print(df.columns)
+print(df.index)
+print(df.columns)
 
 # let's only use the inflow and outflow columns, and rename them
 df = df[['SHA_INFLOW_CFS', 'SHA_OUTFLOW_CFS']]
@@ -23,7 +23,7 @@ df.rename(columns={'SHA_INFLOW_CFS': 'inflow',
 
 
 # because the dataframe is indexed by date, we can slice with dates!
-df = df['2005-10-01':'2008-09-30']
+# df = df['2005-10-01':'2008-09-30']
 
 # it knows the column names from the file
 # also notice the plot x-axis keeps the dates, even if you zoom in
@@ -49,6 +49,8 @@ df = df['2005-10-01':'2008-09-30']
 #   plt.plot(df[Q+'_exc'], df[Q])
 
 # plt.legend(['Inflow', 'Outflow'])
+# plt.ylabel('Streamflow')
+# plt.xlabel('Exceedance')
 # plt.show()
 
 #############

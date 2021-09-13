@@ -4,6 +4,7 @@ import pandas as pd
 
 cfs_to_taf = 2.29568411*10**-5 * 86400 / 1000
 
+
 def water_day(d):
   return d - 274 if d >= 274 else d + 91
 
@@ -25,6 +26,7 @@ def thomasfiering_daily(mu, sigma, rho, N_years):
 # load data and add column for "day of water year" (dowy)
 df = pd.read_csv('data/FOL.csv', index_col=0, parse_dates=True)
 df.rename(columns={'FOL_INFLOW_CFS': 'inflow'}, inplace=True)
+df.inflow[df.inflow < 0] = 0 # fix bad data
 Q = np.log(cfs_to_taf * df.inflow).to_frame()
 Q['dowy'] = pd.Series([water_day(d) for d in Q.index.dayofyear], index=Q.index)
 
@@ -58,10 +60,8 @@ plt.show()
 
 # generate synthetic values and compare plots
 # assume a constant lag-1 autocorrelation
-# Q_synthetic = thomasfiering_daily(mu, sigma, rho=0.95, N_years=15)
-
-# get the historical values back in real space
-# Q.inflow = np.exp(Q.inflow)
+# Q_synthetic = thomasfiering_daily(mu, sigma, rho=0.95, N_years=20)
+# Q.inflow = np.exp(Q.inflow) # convert the original data back to real space
 
 # plt.subplot(2,1,1)
 # plt.plot(Q.inflow.values)
@@ -72,12 +72,13 @@ plt.show()
 # plt.ylim([0,300])
 # plt.show()
 
-# compare ACF/PACF in historical and synthetic
+# # compare ACF/PACF in historical and synthetic
 # from statsmodels.tsa import stattools
 # Q = Q.inflow.values
+# print(np.argwhere(np.isnan(Q)))
 
 # plt.subplot(2,2,1)
-# acf,ci = stattools.acf(Q, nlags = 12, alpha=0.05)
+# acf,ci = stattools.acf(Q, nlags = 40, alpha=0.05)
 # print(acf)
 # print(ci)
 

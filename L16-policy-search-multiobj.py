@@ -1,8 +1,6 @@
 import numpy as np 
 import matplotlib.pyplot as plt
-from platypus.algorithms import NSGAII
-from platypus.core import Problem
-from platypus.types import Real
+from platypus import NSGAII, Problem, Real
 
 # Set some parameters
 K = 975 # capacity, TAF

@@ -48,8 +48,8 @@ h0s = np.arange(0,D,5)
 hfs = np.arange(D,K+D,5)
 
 # or, ranges for zoomed in contour plot
-# h0s = np.arange(75,78,0.5)
-# hfs = np.arange(815,855,0.5)
+# h0s = np.arange(60,90,0.5)
+# hfs = np.arange(800,855,0.5)
 
 data = np.zeros((len(h0s),len(hfs)))
 i,j = 0,0

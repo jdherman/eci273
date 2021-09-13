@@ -27,7 +27,7 @@ def thomasfiering(x,N):
 # assume annual flow data is lognormally distributed
 # this will avoid negative flows
 Q = np.loadtxt('data/folsom-annual-flow.csv', delimiter=',', skiprows=1, usecols=[1])
-Q_synthetic = thomasfiering(Q, N=200)
+Q_synthetic = thomasfiering(Q, N=100)
 
 print('Means: %f, %f' % (Q.mean(),Q_synthetic.mean()))
 print('Stdev: %f, %f' % (Q.std(),Q_synthetic.std()))

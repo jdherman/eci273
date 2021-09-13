@@ -10,7 +10,7 @@ def storage_to_elevation(S): # from regression
 # some parameters assumed specific to folsom
 def simulate_folsom(Q):
   K = 975 # TAF capacity
-  D = 3.5 # TAF/day demand
+  D = 3.5 # TAF/day water demand
   # assume a constant downstream water elevation
   # (neglects the hydraulic effects of changing flowrate)
   downstream_wse = 134 # feet
@@ -37,8 +37,8 @@ def simulate_folsom(Q):
     else:
       R[t] = S[t] + Q[t]
 
-  # metrics from before
-  alteration = np.abs(Q - R - spill).sum() / Q.sum()
+  # metrics from before, not used here
+  alteration = np.abs(Q - R - spill).sum() / Q.sum() # environmental metric, difference between inflows and outflows
   reliability = R[R==D].size / float(T)
 
   # hydropower calculations
@@ -54,7 +54,7 @@ Q = df.FOL_INFLOW_CFS.values * cfs_to_taf # .values gives a numpy array
 
 S, R, power = simulate_folsom(Q)
 
-# add these results into the original dataframe
+# add these results back into the original dataframe
 df['S_sim'] = pd.Series(S, index=df.index)
 df['R_sim'] = pd.Series(R, index=df.index)
 df['power_sim'] = pd.Series(power, index=df.index)

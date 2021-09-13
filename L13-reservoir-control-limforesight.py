@@ -16,6 +16,7 @@ x_save = np.zeros(T+1)
 u_save = np.zeros(T)
 shortage_save = np.zeros(T)
 
+# loop over time horizons, run optimization, save results in array
 for i in range(0,T,h): # zero to T in steps of h
 
   x = Variable(h+1)
@@ -24,9 +25,6 @@ for i in range(0,T,h): # zero to T in steps of h
   # objective function
   # subtract the storage to incentivize saving water
   obj = Minimize(sum((pos(d - u))**2) - x[h])
-
-  # objective function with carryover value target
-  # obj = Minimize(sum((pos(d - u))**2) + pos(200-x[h])**2)
 
   # initial condition
   if i==0:

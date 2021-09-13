@@ -33,6 +33,7 @@ def thomasfiering(x1, x2, N):
     Z = np.random.multivariate_normal([0,0], Sigma, 1)
     Q1[i] = m1 + r1*(Q1[i-1] - m1) + Z[0,0]*s1*np.sqrt(1-r1**2)
     Q2[i] = m2 + r2*(Q2[i-1] - m2) + Z[0,1]*s2*np.sqrt(1-r2**2)
+  
   return np.exp(Q1), np.exp(Q2)
 
 # read in data and upscale to annual. rename the column we're going to use.
@@ -51,6 +52,7 @@ dfF = dfF.resample('AS-OCT').sum()
 # generate synthetic (input numpy arrays)
 Q1, Q2 = thomasfiering(dfS.inflow.values, dfF.inflow.values, N=200)
 
-# compare spatial correlation
+# compare spatial correlation (this is in real space, not log)
 print('Historical r = %0.3f' % np.corrcoef(dfS.inflow.values, dfF.inflow.values)[0,1])
 print('Synthetic r = %0.3f' % np.corrcoef(Q1, Q2)[0,1])
+

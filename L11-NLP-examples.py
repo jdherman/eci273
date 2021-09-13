@@ -16,31 +16,31 @@ def f_constraint(x):
 
 constraint = {'type': 'ineq', 'fun': f_constraint}
 
-sol = optimize.minimize(f, x0 = [0,5], constraints=[constraint])
-print(sol)
+sol = optimize.minimize(f, x0 = [0,5], constraints=[constraint], method='trust-constr')
+print(sol.v)
 
 
 # Second approach: cvxpy
 # this import is easy but also could be confusing
 # because it overwrites common functions (sum, mean, etc) with cvxpy functions
 
-# from cvxpy import * 
+from cvxpy import * 
 
-# x1 = Variable()
-# x2 = Variable()
-# Q = 5 # units of water
+x1 = Variable()
+x2 = Variable()
+Q = 5 # units of water
 
-# obj = Maximize(30*x1 - 4*x1**2 + 10*x2 - 2*x2**2)
+obj = Maximize(30*x1 - 4*x1**2 + 10*x2 - 2*x2**2)
 
-# constraints = [x1 + x2 <= Q, x1 >= 0, x2 >= 0] # magic?
+constraints = [x1 + x2 <= Q, x1 >= 0, x2 >= 0] # magic?
 
-# prob = Problem(obj, constraints)
-# prob.solve()
+prob = Problem(obj, constraints)
+prob.solve()
 
-# print('Objective = %f' % obj.value)
-# print('X1 = %f' % x1.value)
-# print('X2 = %f' % x2.value)
+print('Objective = %f' % obj.value)
+print('X1 = %f' % x1.value)
+print('X2 = %f' % x2.value)
 
-# for c in constraints:
-#   print('Dual (%s) = %f' % (c, c.dual_value))
+for c in constraints:
+  print('Dual (%s) = %f' % (c, c.dual_value))
 

@@ -21,7 +21,7 @@ def get_monthly_stats(x):
     sigma[m] = x[m::12].std()
     x1 = x[m:N-1:12]
     x2 = x[m+1::12]
-    rho[m] = np.corrcoef(x1,x2)[0,1]
+    rho[m] = np.corrcoef(x1,x2)[0,1] # index the matrix
 
   return mu,sigma,rho # log space
 
@@ -46,8 +46,7 @@ def thomasfiering_monthly(mu, sigma, rho, N_years):
 df = pd.read_csv('data/FOL.csv', index_col=0, parse_dates=True)
 Q = (cfs_to_taf * df.FOL_INFLOW_CFS).resample('M').sum().values
 mu,sigma,rho = get_monthly_stats(Q)
-Q_synthetic = thomasfiering_monthly(mu, sigma, rho, N_years=15)
-
+Q_synthetic = thomasfiering_monthly(mu, sigma, rho, N_years=20)
 
 # compare synthetic stats to historical
 a,b,c = get_monthly_stats(Q_synthetic)
@@ -60,12 +59,14 @@ for m in range(12):
   print('Month %d rho: %f, %f' % (m,rho[m],c[m]))
 
 # plot timeseries
-
-plt.subplot(2,1,1)
-plt.plot(Q)
-plt.subplot(2,1,2)
-plt.plot(Q_synthetic)
-plt.show()
+# plt.subplot(2,1,1)
+# plt.plot(Q)
+# plt.title('Historical')
+# plt.subplot(2,1,2)
+# plt.title('Synthetic')
+# plt.plot(Q_synthetic)
+# plt.ylim([0,2000])
+# plt.show()
 
 # compare ACF/PACF in historical and synthetic
 # from statsmodels.tsa import stattools

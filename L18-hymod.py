@@ -68,7 +68,7 @@ problem = {
   'bounds': bounds
 }
 
-param_values = saltelli.sample(problem, 1000)
+param_values = saltelli.sample(problem, 1024)
 N = len(param_values) # number of parameter samples
 Y = np.zeros(N)
 

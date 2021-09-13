@@ -12,12 +12,13 @@ print(Q.autocorr(lag=1))
 
 # plot a correlogram with confidence bounds
 pd.plotting.autocorrelation_plot(Q)
-plt.xlim([0,50])
+plt.xlim([0,20])
 plt.show()
 
 from statsmodels.tsa import stattools
-pacf = stattools.pacf(Q, nlags=50)
-plt.plot(pacf)
+pacf,ci = stattools.pacf(Q, nlags=7, alpha=0.05)
+plt.plot(pacf, linewidth=2)
+plt.plot(ci, linestyle='dashed', color='0.5')
 plt.show()
 
 # we did this with pandas to simplify the resampling operations

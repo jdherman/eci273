@@ -15,7 +15,7 @@ df = pd.read_csv('data/streamflow_cmip5_ncar_day_GRAND.csv',
                   date_parser=lambda x: pd.datetime.strptime(x, '%Y %m %d'))
 
 # filter columns by rcp
-# df = df.filter(like='rcp26')
+df = df.filter(like='rcp26')
 
 # annual rolling mean - method chaining
 annual = ((df * cfs_tafd).resample('AS-OCT').sum()
@@ -28,28 +28,28 @@ plt.ylabel('Annual Streamflow (TAF)')
 plt.show()
 
 
-###################################
-# LP3 flood
+# ###################################
+# # LP3 flood
 
-def lp3(Q, ppf=0.99):
-  # estimate flood with nonexceedance probability `ppf`
-  Q = np.log(Q)
-  m = Q.mean()
-  s = Q.std()
-  g = skew(Q)
+# def lp3(Q, ppf=0.99):
+#   # estimate flood with nonexceedance probability `ppf`
+#   Q = np.log(Q)
+#   m = Q.mean()
+#   s = Q.std()
+#   g = skew(Q)
 
-  # Frequency factor Kp, HH 18.2.29
-  Kp = (2/g)*(1 + g*norm.ppf(ppf)/6 - g**2/36)**3 - 2/g
-  return np.exp(m + s*Kp)
+#   # Frequency factor Kp, HH 18.2.29
+#   Kp = (2/g)*(1 + g*norm.ppf(ppf)/6 - g**2/36)**3 - 2/g
+#   return np.exp(m + s*Kp)
 
-# estimate 100-year flood with a rolling window - method chaining
-Q100 = (df.resample('A')
-          .max()
-          .rolling(window=50)
-          .apply(lp3, raw=True)) # raw=True passes numpy array to lp3 function
+# # estimate 100-year flood with a rolling window - method chaining
+# Q100 = (df.resample('A')
+#           .max()
+#           .rolling(window=50)
+#           .apply(lp3, raw=True)) # raw=True passes numpy array to lp3 function
 
-Q100.plot(color='steelblue', legend=None)
-Q100.mean(axis=1).plot(color='k', linewidth=2)
-plt.title('Colorado River @ Grand Canyon - NCAR CMIP5 Projections')
-plt.ylabel('LP3 Estimate of 100-year flood (cfs)')
-plt.show()
+# Q100.plot(color='steelblue', legend=None)
+# Q100.mean(axis=1).plot(color='k', linewidth=2)
+# plt.title('Colorado River @ Grand Canyon - NCAR CMIP5 Projections')
+# plt.ylabel('LP3 Estimate of 100-year flood (cfs)')
+# plt.show()

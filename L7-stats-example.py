@@ -16,18 +16,18 @@ print('Std. Dev. = %f' % s)
 print('Skew Coef. = %f' % g) # no skew function in numpy
 
 # other keyword arguments: bins, normed (for PDF instead of count)
-plt.hist(annQ, density=True, color='gray', edgecolor='none')
+# plt.hist(annQ, density=True, color='gray', edgecolor='none')
 
 # plot the fitted pdf on top of the histogram
-x = np.arange(min(annQ),max(annQ), 10) # points to plot at
-pdf = stats.norm.pdf(x, loc=m, scale=s)
-plt.plot(x, pdf, color='k', linewidth=2)
-plt.xlabel('inflow (taf/yr)')
-plt.ylabel('pdf')
-plt.show()
+# x = np.arange(min(annQ),max(annQ), 10) # points to plot at
+# pdf = stats.norm.pdf(x, loc=m, scale=s)
+# plt.plot(x, pdf, color='k', linewidth=2)
+# plt.xlabel('inflow (taf/yr)')
+# plt.ylabel('pdf')
+# plt.show()
 
 # next figure - qq plot and find ppcc
-plt.figure()
+# plt.figure()
 quantiles = np.arange(1,N+1)/float(N+1)
 Zp = stats.norm.ppf(quantiles)
 
