@@ -27,16 +27,17 @@ def thomasfiering(x,N):
 # assume annual flow data is lognormally distributed
 # this will avoid negative flows
 Q = np.loadtxt('data/folsom-annual-flow.csv', delimiter=',', skiprows=1, usecols=[1])
-Q_synthetic = thomasfiering(Q, N=200)
+
+Q_synthetic = thomasfiering(Q, N=125)
 
 print('Means: %f, %f' % (Q.mean(),Q_synthetic.mean()))
 print('Stdev: %f, %f' % (Q.std(),Q_synthetic.std()))
 print('Rho: %f, %f' % (autocorr(Q,1), autocorr(Q_synthetic,1)))
-# note "retransformation bias" in rho
+# # note "retransformation bias" in rho
 
 plt.plot(Q_synthetic)
 plt.plot(Q, color='red')
-plt.plot([0,200], [Q.mean(), Q.mean()], color='k', linewidth=2)
+plt.plot([0,125], [Q.mean(), Q.mean()], color='k', linewidth=2)
 plt.legend(['Synthetic', 'Observed', 'Mean'])
 plt.show()
 

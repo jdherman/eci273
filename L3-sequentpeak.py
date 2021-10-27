@@ -6,11 +6,13 @@ import matplotlib.pyplot as plt
 Q = np.tile([1, 3, 3, 5, 8, 6, 7, 2, 1], 2)
 
 T = len(Q)
+K = np.zeros(T+1)
 R = 3.5*np.ones(T)
-for t in range(T):
-  K[t+1] = max(R[t] - Q[t] + K[t], 0)
 
-print('Reservoir size needed: %f' % np.max(K))
+# for t in range(T):
+#   K[t+1] = max(R[t] - Q[t] + K[t], 0)
+
+# print('Reservoir size needed: %f' % np.max(K))
 
 
 # Or...let's do this as a function instead

@@ -36,8 +36,10 @@ def thomasfiering_monthly(mu, sigma, rho, N_years):
   for y in range(N_years):
     for m in range(12):
       i = 12*y + m # index
-      Z = np.random.standard_normal()
-      Q[i] = mu[m] + rho[m-1]*(Q[i-1] - mu[m-1]) + Z*sigma[m]*np.sqrt(1-rho[m-1]**2)
+
+      if i > 0:
+        Z = np.random.standard_normal()
+        Q[i] = mu[m] + rho[m-1]*(Q[i-1] - mu[m-1]) + Z*sigma[m]*np.sqrt(1-rho[m-1]**2)
 
   return np.exp(Q) # real space 
 
@@ -46,6 +48,7 @@ def thomasfiering_monthly(mu, sigma, rho, N_years):
 df = pd.read_csv('data/FOL.csv', index_col=0, parse_dates=True)
 Q = (cfs_to_taf * df.FOL_INFLOW_CFS).resample('M').sum().values
 mu,sigma,rho = get_monthly_stats(Q)
+
 Q_synthetic = thomasfiering_monthly(mu, sigma, rho, N_years=20)
 
 # compare synthetic stats to historical
@@ -59,14 +62,14 @@ for m in range(12):
   print('Month %d rho: %f, %f' % (m,rho[m],c[m]))
 
 # plot timeseries
-# plt.subplot(2,1,1)
-# plt.plot(Q)
-# plt.title('Historical')
-# plt.subplot(2,1,2)
-# plt.title('Synthetic')
-# plt.plot(Q_synthetic)
-# plt.ylim([0,2000])
-# plt.show()
+plt.subplot(2,1,1)
+plt.plot(Q)
+plt.title('Historical')
+plt.subplot(2,1,2)
+plt.title('Synthetic')
+plt.plot(Q_synthetic)
+plt.ylim([0,2000])
+plt.show()
 
 # compare ACF/PACF in historical and synthetic
 # from statsmodels.tsa import stattools

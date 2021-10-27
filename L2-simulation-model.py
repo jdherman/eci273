@@ -1,5 +1,6 @@
 import numpy as np 
 import matplotlib.pyplot as plt
+import sys
 
 # really simple reservoir simulation
 cfs_to_tafd = 2.29568411*10**-5 * 86400 / 1000
@@ -18,7 +19,7 @@ S = np.zeros(T)
 R = np.zeros(T)
 shortage = np.zeros(T)
 
-S[0] = K/2 # start simulation full
+S[0] = K/2 # start simulation half full
 R[0] = D # first day meets demand
 met_demand = 1 # counter
 
@@ -42,7 +43,6 @@ print('The reliability is', reliability)
 # just plotting below here
 plt.subplot(3,1,1)
 plt.plot(S)
-# plt.legend(['Simulated', 'Observed'])
 plt.ylabel('Storage (TAF)')
 
 plt.subplot(3,1,2)

@@ -10,14 +10,14 @@ from scipy import optimize
 def f(x):
   return -1*(30*x[0] - 4*x[0]**2 + 10*x[1] - 2*x[1]**2)
 
-# if returns > zero, constraint satisfied
+# if the function returns > zero, constraint satisfied
 def f_constraint(x):
     return -(x[0] + x[1] - 5)
 
 constraint = {'type': 'ineq', 'fun': f_constraint}
 
-sol = optimize.minimize(f, x0 = [0,5], constraints=[constraint], method='trust-constr')
-print(sol.v)
+sol = optimize.minimize(f, x0 = [0,5], constraints=[constraint])
+print(sol)
 
 
 # Second approach: cvxpy

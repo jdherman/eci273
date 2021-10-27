@@ -8,8 +8,8 @@ df = pd.read_csv('data/SHA.csv',
                  parse_dates=True)
 
 # dataframes have column names and an index
-print(df.index)
-print(df.columns)
+# print(df.columns)
+# print(df.index)
 
 # let's only use the inflow and outflow columns, and rename them
 df = df[['SHA_INFLOW_CFS', 'SHA_OUTFLOW_CFS']]
@@ -20,7 +20,6 @@ df.rename(columns={'SHA_INFLOW_CFS': 'inflow',
 # print(df.inflow) # or df['inflow']. One column is called a Series.
 # print(df.loc['2006-02-01']) 
 # print(df.loc['2006-02-01'].inflow)
-
 
 # because the dataframe is indexed by date, we can slice with dates!
 # df = df['2005-10-01':'2008-09-30']
@@ -35,7 +34,7 @@ df.rename(columns={'SHA_INFLOW_CFS': 'inflow',
 # print(type(matrix))
 # print(matrix)
 
-# # to create a dataframe from a matrix, need to provide index and col names
+# to create a dataframe from a matrix, need to provide index and col names
 # index = pd.date_range('2005-10-01', '2008-09-30', freq='D')
 # df = pd.DataFrame(matrix, index=index, columns=['inflow','outflow'])
 # print(df) # this should match the original that we took "matrix" from

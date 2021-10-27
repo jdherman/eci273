@@ -9,7 +9,8 @@ name = 'somestring'
 # else:
 #   print('more')
 
-# python has two main data types: lists and dictionaries
+# python has two main data types: 
+# lists and dictionaries
 
 # list: things in order
 # fruits = ['apple', 'banana', 'coconut', 'date', 'eucalyptus']
@@ -18,7 +19,7 @@ name = 'somestring'
 # for fruit in fruits:
 #   print(fruit)
 
-# indexing a list
+# indexing a list (zero-indexed)
 # print(fruits[0])
 
 # length of a list
@@ -104,7 +105,7 @@ name = 'somestring'
 # s = 0
 # for i in range(N):
 #   for j in range(5):
-#     s += M[i,j]
+    # s += M[i,j]
 
 # print(s)
 
@@ -122,7 +123,8 @@ name = 'somestring'
 # plt.xlabel('x value')
 # plt.ylabel('Random number')
 # plt.title('my title')
-# plt.show()
 
 # plt.savefig('something.png', dpi = 300)
+# plt.show()
+
 

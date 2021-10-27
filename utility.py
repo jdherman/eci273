@@ -10,6 +10,7 @@ def simulate(K, D, Q):
 
   S[0] = K # start simulation full
   R[0] = D
+  met_demand = 1
 
   for t in range(1,T):
 
@@ -17,7 +18,8 @@ def simulate(K, D, Q):
 
     if S[t] + Q[t] > D:
       R[t] = D
+      met_demand += 1
     else:
       R[t] = S[t] + Q[t]
 
-  return R[R==D].size / T
+  return met_demand / T

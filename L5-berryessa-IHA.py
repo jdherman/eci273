@@ -11,17 +11,17 @@ df = pd.read_csv('data/putah-winters.csv',
 
 ###########
 # first: how much does the reservoir alter the 3-day peak flow?
-max3day = df.rolling(3).mean().resample('AS-OCT').max()
-max3day.plot()
-plt.title('Annual maximum 3-day flow average (cfs)')
-plt.show()
+# max3day = df.rolling(3).mean().resample('AS-OCT').max()
+# max3day.plot()
+# plt.title('Annual maximum 3-day flow average (cfs)')
+# plt.show()
 
-predam_avg = max3day[:'1957'].mean()
-postdam_avg = max3day['1957':].mean()
-print('Pre-Dam 3-day peak flow: %0.2f cfs, Post-dam: %0.2f cfs' % (predam_avg, postdam_avg))
+# predam_avg = max3day[:'1957'].mean()
+# postdam_avg = max3day['1957':].mean()
+# print('Pre-Dam 3-day peak flow: %0.2f cfs, Post-dam: %0.2f cfs' % (predam_avg, postdam_avg))
 
-# ###########
-# # next: how much does the reservoir alter the 30-day minimum flow?
+###########
+# next: how much does the reservoir alter the 30-day minimum flow?
 # min30day = (df.rolling(30).mean()
 #               .resample('AS-OCT').min())
 # min30day.plot()
@@ -41,13 +41,13 @@ print('Pre-Dam 3-day peak flow: %0.2f cfs, Post-dam: %0.2f cfs' % (predam_avg, p
 #   d = x.idxmax().dayofyear # get the date of the peak flow
 #   return (d - 274 if d >= 274 else d + 91) # convert calendar day to water-year day
 
-# # apply the function to get a new series of just the integer days each year
-# day_of_peak = df.resample('AS-OCT').apply(day_of_peak) 
+# apply the function to get a new series of just the integer days each year
+# peak_day = df.resample('AS-OCT').apply(day_of_peak) 
 
-# day_of_peak.plot()
+# peak_day.plot()
 # plt.ylabel('Day of Water Year (Oct 1 = 0)')
 # plt.show()
 
-# predam_avg = day_of_peak[:'1957'].mean()
-# postdam_avg = day_of_peak['1957':].mean()
+# predam_avg = peak_day[:'1957'].mean()
+# postdam_avg = peak_day['1957':].mean()
 # print('Pre-Dam DOWY peak flow: %d, Post-dam: %d' % (predam_avg, postdam_avg))

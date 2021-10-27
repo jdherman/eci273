@@ -18,20 +18,20 @@ m = np.mean(y)
 s = np.std(y)
 Zp = stats.norm.ppf(1 - 1/T)
 Qt = np.exp(m + Zp*s)
-print('Lognormal %d-year flood: %f' % (T,Qt))
+print('Lognormal %d-year flood: %0.2f cfs' % (T,Qt))
 
 # how different is the LP3?
-g = stats.skew(y)
-Kp = (2/g)*(1 + g*Zp/6 - g**2/36)**3 - 2/g
-Qt = np.exp(m + Kp*s)
-print('LP3 %d-year flood: %f' % (T,Qt))
+# g = stats.skew(y)
+# Kp = (2/g)*(1 + g*Zp/6 - g**2/36)**3 - 2/g
+# Qt = np.exp(m + Kp*s)
+# print('LP3 %d-year flood: %0.2f cfs' % (T,Qt))
 
 # confidence interval for lognormal
 # comment out LP3 part first
-# halfwidth = stats.norm.ppf(0.975)*np.sqrt((s**2/N)*(1 + Zp**2/2))
-# lb = np.exp(m + Zp*s - halfwidth)
-# ub = np.exp(m + Zp*s + halfwidth)
-# print('95%% CI: [%f, %f]' % (lb,ub))
+halfwidth = stats.norm.ppf(0.975)*np.sqrt((s**2/N)*(1 + Zp**2/2))
+lb = np.exp(m + Zp*s - halfwidth)
+ub = np.exp(m + Zp*s + halfwidth)
+print('95%% CI: [%f, %f]' % (lb,ub))
 
 
 

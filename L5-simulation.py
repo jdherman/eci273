@@ -1,6 +1,9 @@
 import numpy as np 
 import matplotlib.pyplot as plt
 
+# What is the tradeoff between water supply reliability
+# and hydrologic alteration?
+
 # added a spill variable since that counts
 # for downstream environmental flows too
 
@@ -26,7 +29,8 @@ def simulate(K, D, Q):
   # this metric would account for timing
   # but it's not quite the same as the "ecochange" metric
   alteration = np.abs(Q - R - spill).sum() / Q.sum()
-  return R[R==D].size / float(T), alteration
+  reliability = R[R==D].size / T
+  return reliability, alteration
 
 # data setup
 Q = np.loadtxt('data/FTO-FNF.csv', delimiter=',', skiprows=1, usecols=[1])

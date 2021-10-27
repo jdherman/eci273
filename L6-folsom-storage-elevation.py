@@ -13,7 +13,7 @@ df.plot.scatter('storage', 'elevation')
 plt.xlabel('Storage (TAF)')
 plt.ylabel('Water Surface Elevation (ft)')
 
-# # then fit a quadratic and keep the equation for the next code example.
+# then fit a quadratic and keep the equation for the next code example.
 p = np.polyfit(df.storage.values, df.elevation.values, 2)
 print('Regression: Elevation = %f S**2 + %f S + %f' % tuple(p))
 f = np.poly1d(p)

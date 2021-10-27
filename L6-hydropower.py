@@ -38,8 +38,8 @@ def simulate_folsom(Q):
       R[t] = S[t] + Q[t]
 
   # metrics from before, not used here
-  alteration = np.abs(Q - R - spill).sum() / Q.sum() # environmental metric, difference between inflows and outflows
-  reliability = R[R==D].size / float(T)
+  # alteration = np.abs(Q - R - spill).sum() / Q.sum() # environmental metric, difference between inflows and outflows
+  # reliability = R[R==D].size / float(T)
 
   # hydropower calculations
   h = WSE - downstream_wse # hydraulic head, feet

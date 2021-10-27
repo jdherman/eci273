@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # Oroville
 
 # Set some parameters
-K = 3500 # capacity, TAF
+K = 0 # capacity, TAF
 D = 300 # target demand, TAF/month
 # data setup
 Q = np.loadtxt('data/FTO-FNF.csv', delimiter=',', skiprows=1, usecols=[1])

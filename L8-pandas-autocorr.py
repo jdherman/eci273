@@ -12,7 +12,7 @@ print(Q.autocorr(lag=1))
 
 # plot a correlogram with confidence bounds
 pd.plotting.autocorrelation_plot(Q)
-plt.xlim([0,20])
+plt.xlim([0,365])
 plt.show()
 
 from statsmodels.tsa import stattools
@@ -24,11 +24,11 @@ plt.show()
 # we did this with pandas to simplify the resampling operations
 # but we can also do it with numpy
 # (using annual flow values)
-# Q = df.SHA_INFLOW_CFS.resample('AS-OCT').sum().values # now a numpy array
+Q = df.SHA_INFLOW_CFS.resample('AS-OCT').sum().values # now a numpy array
 
-# def autocorr(x,k):
-#   return np.corrcoef(x[:len(x)-k], x[k:])[0,1]
+def autocorr(x,k):
+  return np.corrcoef(x[:len(x)-k], x[k:])[0,1]
 
-# print(autocorr(Q,k=1))
+print(autocorr(Q,k=1))
 
 

@@ -4,7 +4,6 @@ import pandas as pd
 
 cfs_to_taf = 2.29568411*10**-5 * 86400 / 1000
 
-
 def water_day(d):
   return d - 274 if d >= 274 else d + 91
 
@@ -26,62 +25,58 @@ def thomasfiering_daily(mu, sigma, rho, N_years):
 # load data and add column for "day of water year" (dowy)
 df = pd.read_csv('data/FOL.csv', index_col=0, parse_dates=True)
 df.rename(columns={'FOL_INFLOW_CFS': 'inflow'}, inplace=True)
-df.inflow[df.inflow < 0] = 0 # fix bad data
+df.loc[df.inflow < 0, 'inflow'] = 0.001 # fix bad data
 Q = np.log(cfs_to_taf * df.inflow).to_frame()
 Q['dowy'] = pd.Series([water_day(d) for d in Q.index.dayofyear], index=Q.index)
 
 # get the mean value on each day (0-365). Moving average smoothing.
 mean_daily_flow = Q.groupby(Q.dowy).mean()
-mu = mean_daily_flow.rolling(10, center=True, min_periods=0).mean()
+mu = mean_daily_flow.rolling(1, center=True, min_periods=0).mean()
 mu = mu.values # numpy
 
 # same for standard deviation
 std_daily_flow = Q.groupby(Q.dowy).std()
-sigma = std_daily_flow.rolling(10, center=True, min_periods=0).mean()
+sigma = std_daily_flow.rolling(1, center=True, min_periods=0).mean()
 sigma = sigma.values # numpy
 
 # plot these daily values
 
-plt.subplot(1,2,1)
-plt.plot(mean_daily_flow, color='0.5')
-plt.plot(mu, color='k', linewidth=2)
-plt.xlabel('Day of water year')
-plt.xlim([0,365])
-plt.ylabel('Log Mean streamflow')
+# plt.subplot(1,2,1)
+# plt.plot(mean_daily_flow, color='0.5')
+# plt.plot(mu, color='k', linewidth=2)
+# plt.xlabel('Day of water year')
+# plt.xlim([0,365])
+# plt.ylabel('Log Mean streamflow')
 
-plt.subplot(1,2,2)
-plt.plot(std_daily_flow, color='0.5')
-plt.plot(sigma, color='k', linewidth=2)
-plt.xlabel('Day of water year')
-plt.xlim([0,365])
-plt.ylabel('Stdev log streamflow')
-plt.tight_layout()
-plt.show()
+# plt.subplot(1,2,2)
+# plt.plot(std_daily_flow, color='0.5')
+# plt.plot(sigma, color='k', linewidth=2)
+# plt.xlabel('Day of water year')
+# plt.xlim([0,365])
+# plt.ylabel('Stdev log streamflow')
+# plt.tight_layout()
+# plt.show()
 
 # generate synthetic values and compare plots
 # assume a constant lag-1 autocorrelation
-# Q_synthetic = thomasfiering_daily(mu, sigma, rho=0.95, N_years=20)
-# Q.inflow = np.exp(Q.inflow) # convert the original data back to real space
+Q_synthetic = thomasfiering_daily(mu, sigma, rho=0.95, N_years=20)
+Q.inflow = np.exp(Q.inflow) # convert the original data back to real space
 
-# plt.subplot(2,1,1)
-# plt.plot(Q.inflow.values)
-# plt.ylim([0,300])
+plt.subplot(2,1,1)
+plt.plot(Q.inflow.values)
+plt.ylim([0,300])
 
-# plt.subplot(2,1,2)
-# plt.plot(Q_synthetic)
-# plt.ylim([0,300])
-# plt.show()
+plt.subplot(2,1,2)
+plt.plot(Q_synthetic)
+plt.ylim([0,300])
+plt.show()
 
-# # compare ACF/PACF in historical and synthetic
+# compare ACF/PACF in historical and synthetic
 # from statsmodels.tsa import stattools
 # Q = Q.inflow.values
-# print(np.argwhere(np.isnan(Q)))
 
 # plt.subplot(2,2,1)
 # acf,ci = stattools.acf(Q, nlags = 40, alpha=0.05)
-# print(acf)
-# print(ci)
-
 # plt.plot(acf, linewidth=2)
 # plt.plot(ci, linestyle='dashed', color='0.5')
 # plt.title('ACF, Historical')

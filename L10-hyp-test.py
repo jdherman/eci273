@@ -12,7 +12,7 @@ def thomasfiering(x,N):
   to generate a synthetic sequence of N timesteps.
   Assumes x is lognormally distributed.'''
   x = np.log(x) # log-space avoids negative values
-  mu = x.mean()
+  mu = x.mean() 
   sigma = x.std()
   rho = autocorr(x,1)
   Q = np.zeros(N) # initialize
