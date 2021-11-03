@@ -24,7 +24,7 @@ for i in range(0,T,h): # zero to T in steps of h
 
   # objective function
   # subtract the storage to incentivize saving water
-  obj = Minimize(sum((pos(d - u))**2) - x[h])
+  obj = Minimize(sum((pos(d - u))**2) - 50*x[h])
 
   # initial condition
   if i==0:
@@ -47,14 +47,11 @@ for i in range(0,T,h): # zero to T in steps of h
   print('Obj Fun: %f' % obj.value)
 
   # save in big array
-  x_save[i:i+h+1] = x.value.flatten()
 
-  if h > 1:
-    u_save[i:i+h] = u.value.flatten()
-    shortage_save[i:i+h] = (d-u.value.flatten()).clip(0,999)
-  else:
-    u_save[i:i+h] = u.value
-    shortage_save[i:i+h] = (d-u.value).clip(0,999)
+  x_save[i:i+h+1] = x.value
+  u_save[i:i+h] = u.value
+  shortage_save[i:i+h] = (d-u.value).clip(0,999)
+
 
 # plot the state variable (storage) and control variable (release)
 plt.subplot(3,1,1)

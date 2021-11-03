@@ -15,31 +15,33 @@ print('Scipy Output:')
 print(sol)
 
 
-# Second approach: cxvpy
+# Second approach: cvxpy
 # this import is easy but also could be confusing
 # because it overwrites common functions (sum, mean, etc) with cvxpy functions
-# from cvxpy import *
 
-# xc = Variable(name='xc')
-# xb = Variable(name='xb')
-# pc = 5
-# pb = 3
 
-# obj = Maximize(pc*xc + pb*xb)
+from cvxpy import *
 
-# constraints = [10*xc + 5*xb <= 20,
-#                xc + 1.5*xb <= 3,
-#                2*xc + 2*xb <= 4.5,
-#                xc >= 0,
-#                xb >= 0]
+xc = Variable(name='xc')
+xb = Variable(name='xb')
+pc = 5
+pb = 3
 
-# prob = Problem(obj, constraints)
-# prob.solve()
+obj = Maximize(pc*xc + pb*xb)
 
-# print('\ncvxpy Output:')
-# print('Objective = %f' % obj.value)
-# print('xc = %f' % xc.value)
-# print('xb = %f' % xb.value)
+constraints = [10*xc + 5*xb <= 20,
+               xc + 1.5*xb <= 3,
+               2*xc + 2*xb <= 4.5,
+               xc >= 0,
+               xb >= 0]
 
-# for c in constraints:
-#   print('Dual (%s) = %f' % (c, c.dual_value))
+prob = Problem(obj, constraints)
+prob.solve()
+
+print('\ncvxpy Output:')
+print('Objective = %f' % obj.value)
+print('xc = %f' % xc.value)
+print('xb = %f' % xb.value)
+
+for c in constraints:
+  print('Dual (%s) = %f' % (c, c.dual_value))

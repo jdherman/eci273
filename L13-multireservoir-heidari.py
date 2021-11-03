@@ -25,9 +25,9 @@ B = np.array([[1.1,1.4,1.0,1.0,1.6],
 
 # reservoir connectivity matrix
 M = np.array([[-1,0,0,0],
-             [0,-1,0,0],
-             [0,1,-1,0],
-             [1,0,1,-1]])
+              [0,-1,0,0],
+              [0,1,-1,0],
+              [1,0,1,-1]])
 
 # inflows (constant)
 y = np.zeros((T,4))

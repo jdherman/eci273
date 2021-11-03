@@ -17,7 +17,7 @@ def f_constraint(x):
 constraint = {'type': 'ineq', 'fun': f_constraint}
 
 sol = optimize.minimize(f, x0 = [0,5], constraints=[constraint])
-print(sol)
+# print(sol)
 
 
 # Second approach: cvxpy
@@ -31,7 +31,6 @@ x2 = Variable()
 Q = 5 # units of water
 
 obj = Maximize(30*x1 - 4*x1**2 + 10*x2 - 2*x2**2)
-
 constraints = [x1 + x2 <= Q, x1 >= 0, x2 >= 0] # magic?
 
 prob = Problem(obj, constraints)

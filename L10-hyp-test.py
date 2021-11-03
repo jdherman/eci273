@@ -38,6 +38,10 @@ from scipy import stats
 
 _, p = stats.ranksums(Q, Q_synthetic)
 
+plt.hist(Q, alpha=0.5)
+plt.hist(Q_synthetic, alpha=0.5)
+plt.show()
+
 print('p = %0.4f' % p)
 
 if p < 0.05:
