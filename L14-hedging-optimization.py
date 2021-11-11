@@ -44,12 +44,13 @@ def simulate(x):
 
 # to use gradient-based optimization...
 res = minimize(simulate, 
-               x0=[65,820], 
+               x0=[65,820],
+               # x0 = [0,D], 
                bounds = [(0,D), (D,K+D)])
 
 # to use EA...
-# res = differential_evolution(simulate, 
-#       bounds = [(0,D), (D,K+D)])
+res = differential_evolution(simulate, 
+      bounds = [(0,D), (D,K+D)])
 
 # 
 # res.x contains the optimal h0,hf values

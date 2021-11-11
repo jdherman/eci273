@@ -34,11 +34,11 @@ for w in np.arange(0,1+dw,dw):
   prob.solve()
   results.append([cost.value, alteration.value])
 
-  # plt.subplot(11,1,i)
-  # plt.plot(Q, color='blue')
-  # plt.plot(u.value, color='red')
-  # plt.ylabel('Flow (TAF/m)')
-  # plt.legend(['Inflow', 'Outflow'])
+  plt.subplot(11,1,i)
+  plt.plot(Q, color='blue')
+  plt.plot(u.value, color='red')
+  plt.ylabel('Flow (TAF/m)')
+  plt.legend(['Inflow', 'Outflow'])
   print(i)
   i += 1
 

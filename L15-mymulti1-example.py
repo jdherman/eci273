@@ -13,14 +13,12 @@ def f2(x):
 
 x_keep = []
 f_keep = []
-dw = 0.05 # how much to change weights by
+dw = 0.1 # how much to change weights by
+
+def objfun(x):
+  return w*f1(x) + (1-w)*f2(x)
 
 for w in np.arange(0,1+dw,dw):
-
-  # redefine the single-objective function with new weights
-  # yea you can do this, maybe don't make a habit of it though
-  def objfun(x):
-    return w*f1(x) + (1-w)*f2(x)
 
   sol = optimize.minimize(objfun, x0 = [1,-1])
   x_keep.append(sol.x)
