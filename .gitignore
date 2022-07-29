@@ -4,3 +4,6 @@ old/
 .DS_Store
 data/cdec-scraper
 data/not-used-F21
+archive-2022/
+__pycache__/
+.ipynb_checkpoints/

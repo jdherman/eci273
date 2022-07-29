@@ -1,5 +1,5 @@
 UC Davis ECI 273 - Water Resources Systems Engineering 
-Last updated Fall 2021
+Last updated Summer 2022
 
 In-class code examples for simulation, optimization, and data analysis. These examples are for instructional purposes and should not be used in production.
 
