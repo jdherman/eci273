@@ -1,5 +1,6 @@
 platypus/
 old/
+updates/
 *.pyc
 .DS_Store
 data/cdec-scraper
