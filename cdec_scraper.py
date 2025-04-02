@@ -16,7 +16,9 @@ def cdec_reformat_series(df):
   try:
     df.index.rename('datetime', inplace=True)
     # keep just the "VALUE" column and rename it
-    name = '%s_%s_%s' % (df['STATION_ID'][0], df['SENSOR_TYPE'][0], df['UNITS'][0])
+    name = '%s_%s_%s' % (df['STATION_ID'].iloc[0], 
+                         df['SENSOR_TYPE'].iloc[0], 
+                         df['UNITS'].iloc[0])
     df = df['VALUE'].rename(name).to_frame()
   except IndexError: #empty data frame causes indexerror
     raise IndexError('Requested data does not exist')
